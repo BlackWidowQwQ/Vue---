@@ -6,6 +6,7 @@ import Count from "@/views/Count.vue";
 import Statistics from "@/views/Statistics.vue";
 import AddBill from "@/views/AddBill.vue";
 import MyOption from "@/views/MyOption.vue";
+import NotFound from "@/views/NotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
   {
     path: "/myOption",
     component: MyOption,
+  },
+
+  {
+    path: "*",
+    component: NotFound,
   },
 
   // {
