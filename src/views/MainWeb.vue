@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    MainWeb.vue
+    <Layout>MainWeb.vue</Layout>
   </div>
 </template>
 

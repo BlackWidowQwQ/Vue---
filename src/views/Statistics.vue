@@ -1,6 +1,6 @@
 <template>
   <div>
-    Statistics.vue
+    <Layout>Statistics.vue</Layout>
   </div>
 </template>
 

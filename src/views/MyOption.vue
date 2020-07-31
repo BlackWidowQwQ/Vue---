@@ -1,6 +1,6 @@
 <template>
   <div>
-    MyOption.vue
+    <Layout>MyOption.vue</Layout>
   </div>
 </template>
 

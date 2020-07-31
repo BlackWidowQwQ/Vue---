@@ -1,6 +1,6 @@
 <template>
   <div>
-    Count.vue
+   <Layout>Count.vue</Layout>
   </div>
 </template>
 

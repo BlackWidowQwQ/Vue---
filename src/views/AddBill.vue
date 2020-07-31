@@ -1,14 +1,12 @@
 <template>
   <div>
-    AddBill.vue
-    <Nav />
+    <Layout>AddBill.vue</Layout>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: "AddBill",
-  
 };
 </script>
 
