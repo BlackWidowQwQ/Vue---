@@ -34,7 +34,7 @@ export default {
 
 .nav {
   display: flex;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 3px rgba(87, 55, 55, 0.4);
   flex-direction: row;
   > .item {
     padding: 2px 0;
