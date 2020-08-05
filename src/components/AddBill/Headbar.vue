@@ -24,27 +24,27 @@ export default {
   color: white;
   > li {
     // border: solid 1px;
-    width: 128px;
+    width: 96px;
     height: 75%;
     display: flex;
     justify-content: center;
     align-items: center;
     &.selected {
-      background: lighten($color-theme-0, 50%);
+      background: lighten($color-theme-0, 100%);
       box-shadow: 4px -4px darken($color-theme-0, 10%);
       color: #333;
-      font-size: 22px;
+      font-size: 23px;
       font-weight: bold;
-      //使用伪元素添加下划线，不喜欢
-      // &.selected::after {
-      //   content: "";
-      //   position: absolute;
-      //   bottom: 0;
-      //   left: 0;
-      //   width: 100%;
-      //   height: 3px;
-      //   background: #333;
-      // }
+      position: relative;
+      &.selected::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: lighten($color-theme-0, 100%);
+      }
       border-radius: 20px 20px 0 0;
     }
   }

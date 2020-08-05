@@ -17,3 +17,9 @@ ol,
 li {
   list-style: none;
 }
+
+button,
+input {
+  //字体默认不会继承body，需要写出来
+  font: inherit;
+}
