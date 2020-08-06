@@ -7,24 +7,39 @@
   </div>
 </template>
 
-<script lang="js">
-export default {
-  name: "Headbar",
-  
-  data(){
-    return {
-      type:"-", //"-"表示支出，"+"表示收入
-    }
-  },
+<script lang="ts">
+// export default {
+//   name: "Headbar",
+//   data(){
+//     return {
+//       type:"-", //"-"表示支出，"+"表示收入
+//     }
+//   },
+//   methods:{
+//     selectType(type){ //type只能是"-"和"+"哦
+//       if(type!=="-" && type!=="+")
+//       throw new Error("type is unknown");
+//       this.type=type;
+//     }
+//   }
+// };
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
 
-  methods:{
-    selectType(type){ //type只能是"-"和"+"哦
-      if(type!=="-" && type!=="+")
-      throw new Error("type is unknown");
-      this.type=type;
-    }
+@Component({
+  props: {
+    propMessage: String,
+  },
+}) //装饰器，自动把type和selectType()处理成数据和方法
+export default class Headbar extends Vue {
+  type = "-"; //"-"表示支出，"+"表示收入
+  helloMsg = "Hello, " + this.propMessage;
+  selectType(type: string) {
+    //type只能是"-"和"+"哦
+    if (type !== "-" && type !== "+") throw new Error("type is unknown");
+    this.type = type;
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
