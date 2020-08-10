@@ -17,28 +17,27 @@ import Head from "@/components/AddBill/Head.vue";
 import Caculator from "@/components/AddBill/Caculator.vue";
 import Tags from "@/components/AddBill/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
+import model from "@/model.ts";
 
-const recordList = JSON.parse(
-  window.localStorage.getItem("recordList") || "[]"
-);
-
-type Record = {
-  type: string;
-  tags: string[];
-  notes: string;
-  amount: number;
-  createdAt?: Date;
-};
+const recordList = model.fetch();
 
 @Component({
   components: { Head, Caculator, Tags },
 })
 export default class AddBill extends Vue {
-  tags = ["衣", "食", "住", "行", "吃"];
-  recordList: Record[] = recordList;
-  record: Record = { tags: [], notes: "", type: "-", amount: 0 };
+  tags = [
+    { name: "food", value: "餐饮" },
+    { name: "shopping", value: "购物" },
+    { name: "house", value: "居住" },
+    { name: "transport", value: "交通" },
+    { name: "entertainment", value: "娱乐" },
+    { name: "medical", value: "医疗" },
+  ];
 
-  onUpdateTags(tags: string[]) {
+  recordList: RecordItem[] = recordList;
+  record: RecordItem = { tags: [], notes: "", type: "-", amount: 0 };
+
+  onUpdateTags(tags: TagItem[]) {
     this.record.tags = tags;
   }
   onUpdateNotes(notes: string) {
@@ -46,13 +45,13 @@ export default class AddBill extends Vue {
   }
 
   saveRecord() {
-    const record2: Record = JSON.parse(JSON.stringify(this.record));
+    const record2: RecordItem = model.clone(this.record);
     record2.createdAt = new Date();
     this.recordList.push(record2);
   }
   @Watch("recordList")
   onRecordListChanged() {
-    window.localStorage.setItem("recordList", JSON.stringify(this.recordList));
+    model.save(this.recordList);
   }
 }
 </script>
