@@ -84,6 +84,7 @@ export default class Caculator extends Vue {
   ok() {
     this.$emit("update:amountValue", this.output);
     this.$emit("submit", this.output);
+    this.output = "0";
   }
 }
 </script>
