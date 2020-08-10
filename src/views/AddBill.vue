@@ -1,19 +1,40 @@
 <template>
   <div class="addBill">
-    <Head />
-    <Tags />
-    <Caculator />
+    {{record}}
+    <Head :typeValue.sync="record.type" />
+    <Tags :data-source.sync="tags" @update:tagValue="onUpdateTags" />
+    <Caculator :amountValue.sync="record.amount" @update:noteValue="onUpdateNotes" />
   </div>
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import Head from "@/components/AddBill/Head.vue";
 import Caculator from "@/components/AddBill/Caculator.vue";
 import Tags from "@/components/AddBill/Tags.vue";
-export default {
-  name: "AddBill",
-  components: { Head, Caculator, Tags },
+import { Component } from "vue-property-decorator";
+
+type Record = {
+  type: string;
+  tags: string[];
+  notes: string;
+  amount: number;
 };
+
+@Component({
+  components: { Head, Caculator, Tags },
+})
+export default class AddBill extends Vue {
+  tags = ["衣", "食", "住", "行", "吃"];
+  record: Record = { tags: [], notes: "", type: "-", amount: 0 };
+
+  onUpdateTags(tags: string[]) {
+    this.record.tags = tags;
+  }
+  onUpdateNotes(notes: string) {
+    this.record.notes = notes;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
