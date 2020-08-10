@@ -3,7 +3,11 @@
     {{record}}
     <Head :typeValue.sync="record.type" />
     <Tags :data-source.sync="tags" @update:tagValue="onUpdateTags" />
-    <Caculator :amountValue.sync="record.amount" @update:noteValue="onUpdateNotes" />
+    <Caculator
+      :amountValue.sync="record.amount"
+      @submit="saveRecord"
+      @update:noteValue="onUpdateNotes"
+    />
   </div>
 </template>
 
@@ -12,7 +16,7 @@ import Vue from "vue";
 import Head from "@/components/AddBill/Head.vue";
 import Caculator from "@/components/AddBill/Caculator.vue";
 import Tags from "@/components/AddBill/Tags.vue";
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 
 type Record = {
   type: string;
@@ -26,6 +30,7 @@ type Record = {
 })
 export default class AddBill extends Vue {
   tags = ["衣", "食", "住", "行", "吃"];
+  recordList: Record[] = [];
   record: Record = { tags: [], notes: "", type: "-", amount: 0 };
 
   onUpdateTags(tags: string[]) {
@@ -33,6 +38,16 @@ export default class AddBill extends Vue {
   }
   onUpdateNotes(notes: string) {
     this.record.notes = notes;
+  }
+
+  saveRecord() {
+    const record2 = JSON.parse(JSON.stringify(this.record));
+    this.recordList.push(record2);
+    console.log(this.recordList);
+  }
+  @Watch("recordList")
+  onRecordListChanged() {
+    window.localStorage.setItem("recordList", JSON.stringify(this.recordList));
   }
 }
 </script>
