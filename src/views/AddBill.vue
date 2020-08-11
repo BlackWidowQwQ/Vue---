@@ -1,8 +1,11 @@
 <template>
   <div class="addBill">
-    {{recordList}}
     <Head :typeValue.sync="record.type" />
-    <Tags :data-source.sync="tags" @update:tagValue="onUpdateTags" />
+    <Tags
+      :data-source.sync="tags"
+      :selectedTag.sync="record.tag"
+      :dynamic="true"
+    />
     <Caculator
       :amountValue.sync="record.amount"
       @submit="saveRecord"
@@ -35,11 +38,14 @@ export default class AddBill extends Vue {
   ];
 
   recordList: RecordItem[] = recordList;
-  record: RecordItem = { tags: [], notes: "", type: "-", amount: 0 };
 
-  onUpdateTags(tags: TagItem[]) {
-    this.record.tags = tags;
-  }
+  record: RecordItem = {
+    tag: { name: "food", value: "餐饮" },
+    notes: "",
+    type: "-",
+    amount: 0,
+  };
+
   onUpdateNotes(notes: string) {
     this.record.notes = notes;
   }

@@ -5,7 +5,7 @@ type TagItem = {
 
 type RecordItem = {
   type: string;
-  tags: TagItem[];
+  tag: TagItem;
   notes: string;
   amount: number;
   createdAt?: Date;

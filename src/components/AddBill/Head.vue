@@ -7,8 +7,12 @@
     </router-link>
 
     <ul class="type">
-      <li :class="typeValue==='-' && 'selected'" @click="selectType('-')">支出</li>
-      <li :class="typeValue==='+' && 'selected'" @click="selectType('+')">收入</li>
+      <li :class="typeValue === '-' && 'selected'" @click="selectType('-')">
+        支出
+      </li>
+      <li :class="typeValue === '+' && 'selected'" @click="selectType('+')">
+        收入
+      </li>
     </ul>
   </div>
 </template>
@@ -37,10 +41,10 @@ export default class Head extends Vue {
   position: relative;
   .cancel {
     position: absolute;
-    height: 100%;
     left: 0;
+    height: 100%;
     > button {
-      height: 100%;
+      height: 64px;
       background: transparent;
       border: none;
       .icon {

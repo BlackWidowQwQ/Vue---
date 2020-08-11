@@ -7,7 +7,7 @@ import Statistics from "@/views/Statistics.vue";
 import AddBill from "@/views/AddBill.vue";
 import MyOption from "@/views/MyOption.vue";
 import NotFound from "@/views/NotFound.vue";
-
+import OtherTags from "@/views/OtherTags.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -30,6 +30,11 @@ const routes = [
   {
     path: "/addBill",
     component: AddBill,
+  },
+
+  {
+    path: "/otherTags",
+    component: OtherTags,
   },
 
   {

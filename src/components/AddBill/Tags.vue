@@ -3,7 +3,7 @@
     <li
       v-for="(tag, index) in dataSource"
       :key="index"
-      :class="{selected:selectedTag.indexOf(tag)>=0}"
+      :class="{selected:selectedTag.name===tag.name}"
       @click="toggle(tag)"
     >
       <div>
@@ -12,7 +12,7 @@
       <span>{{tag.value}}</span>
     </li>
 
-    <li class="new" @click="create">
+    <li v-if="dynamic" class="new" @click="create">
       <div>
         <Icon name="addTag" />
       </div>
@@ -28,25 +28,21 @@ import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Tags extends Vue {
   @Prop() readonly dataSource: TagItem[] | undefined;
-  selectedTag: TagItem[] = [];
+  @Prop() readonly selectedTag!: TagItem;
+  @Prop({ type: Boolean, default: false }) dynamic!: boolean;
 
   toggle(tag: TagItem) {
-    const index = this.selectedTag.indexOf(tag);
-    if (index >= 0) {
-      this.selectedTag.splice(index, 1);
-    } else {
-      this.selectedTag.push(tag);
-    }
-    this.$emit("update:tagValue", this.selectedTag);
+    this.$emit("update:selectedTag", tag);
   }
 
   create() {
-    const name = window.prompt("请输入标签名");
-    if (name === "") {
-      window.alert("标签名不能为空!"); //name为用户输入的内容
-    } else if (this.dataSource && name) {
-      this.$emit("update:dataSource", [...this.dataSource, name]);
-    }
+    // const name = window.prompt("请输入标签名");
+    // if (name === "") {
+    //   window.alert("标签名不能为空!"); //name为用户输入的内容
+    // } else if (this.dataSource && name) {
+    //   this.$emit("update:dataSource", [...this.dataSource, name]);
+    // }
+    this.$router.push("/otherTags");
   }
 }
 </script>
@@ -54,7 +50,6 @@ export default class Tags extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .tags {
-  border: 1px solid red;
   padding: 16px;
   display: flex;
   flex-grow: 1;
