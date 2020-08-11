@@ -1,5 +1,6 @@
 <template>
   <div class="addBill">
+    {{ recordList }}
     <Head :typeValue.sync="record.type" />
     <Tags
       :data-source.sync="tags"
@@ -20,23 +21,24 @@ import Head from "@/components/AddBill/Head.vue";
 import Caculator from "@/components/AddBill/Caculator.vue";
 import Tags from "@/components/AddBill/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
-import model from "@/model.ts";
-
-const recordList = model.fetch();
+import recordListModel from "@/model/recordListModel.ts";
+import tagListModel from "@/model/tagListModel.ts";
+const recordList = recordListModel.fetch();
+const tagList = tagListModel.fetch();
 
 @Component({
   components: { Head, Caculator, Tags },
 })
 export default class AddBill extends Vue {
-  tags = [
-    { name: "food", value: "餐饮" },
-    { name: "shopping", value: "购物" },
-    { name: "house", value: "居住" },
-    { name: "transport", value: "交通" },
-    { name: "entertainment", value: "娱乐" },
-    { name: "medical", value: "医疗" },
-  ];
-
+  tags = tagList;
+  // [
+  //     { name: "food", value: "餐饮" },
+  //     { name: "shopping", value: "购物" },
+  //     { name: "house", value: "居住" },
+  //     { name: "transport", value: "交通" },
+  //     { name: "entertainment", value: "娱乐" },
+  //     { name: "medical", value: "医疗" },
+  //   ];
   recordList: RecordItem[] = recordList;
 
   record: RecordItem = {
@@ -51,13 +53,13 @@ export default class AddBill extends Vue {
   }
 
   saveRecord() {
-    const record2: RecordItem = model.clone(this.record);
+    const record2: RecordItem = recordListModel.clone(this.record);
     record2.createdAt = new Date();
     this.recordList.push(record2);
   }
   @Watch("recordList")
   onRecordListChanged() {
-    model.save(this.recordList);
+    recordListModel.save(this.recordList);
   }
 }
 </script>

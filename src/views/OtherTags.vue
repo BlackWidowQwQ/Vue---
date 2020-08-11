@@ -53,6 +53,7 @@
 import Vue from "vue";
 import Tags from "@/components/AddBill/Tags.vue";
 import tagStore from "@/constants/tagStore.ts";
+import tagListModel from "@/model/tagListModel.ts";
 import { Component, Prop } from "vue-property-decorator";
 
 const {
@@ -64,11 +65,15 @@ const {
   medicalTags,
 } = tagStore;
 
+tagListModel.fetch();
+
 @Component({
   components: { Tags },
 })
 export default class OtherTags extends Vue {
   lightTag: TagItem = { name: "food", value: "餐饮" };
+
+  tagList = tagListModel.data;
 
   foodTags = foodTags;
   shoppingTags = shoppingTags;
@@ -76,6 +81,19 @@ export default class OtherTags extends Vue {
   houseTags = houseTags;
   entertainmentTags = entertainmentTags;
   medicalTags = medicalTags;
+
+  ok() {
+    if (this.lightTag) {
+      try {
+        tagListModel.create(this.lightTag);
+        this.$router.push("/addBill");
+      } catch (error) {
+        if (error.message === "duplicated") {
+          window.alert("标签重复啦！请重新选！");
+        }
+      }
+    }
+  }
 }
 </script>
 
