@@ -84,13 +84,12 @@ export default class OtherTags extends Vue {
 
   ok() {
     if (this.lightTag) {
-      try {
-        tagListModel.create(this.lightTag);
-        this.$router.push("/addBill");
-      } catch (error) {
-        if (error.message === "duplicated") {
-          window.alert("标签重复啦！请重新选！");
-        }
+      const message = tagListModel.create(this.lightTag);
+      if (message === "duplicated") {
+        window.alert("标签重复了，请重新输入");
+      } else if (message === "success") {
+        window.alert("添加新标签成功!");
+        this.$router.replace("/addBill");
       }
     }
   }

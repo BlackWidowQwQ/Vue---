@@ -5,11 +5,11 @@ const tagListModel = {
   create(tag: TagItem) {
     const flag = this.data.some((item) => item.name === tag.name);
     if (flag) {
-      throw new Error("duplicated");
+      return "duplicated"; //用返回的字符串"duplicated"表重复了
     } else {
       this.data.push(tag);
       this.save();
-      return true;
+      return "success"; //用返回的字符串"success”表创建成功
     }
   },
 
@@ -17,6 +17,7 @@ const tagListModel = {
     this.data = JSON.parse(
       window.localStorage.getItem(localStorageKeyName) || "[]"
     );
+
     return this.data;
   },
 

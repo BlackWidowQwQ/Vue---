@@ -3,13 +3,13 @@
     <li
       v-for="(tag, index) in dataSource"
       :key="index"
-      :class="{selected:selectedTag.name===tag.name}"
+      :class="{ selected: selectedTag.name === tag.name }"
       @click="toggle(tag)"
     >
       <div>
         <Icon :name="tag.name" />
       </div>
-      <span>{{tag.value}}</span>
+      <span>{{ tag.value }}</span>
     </li>
 
     <li v-if="dynamic" class="new" @click="create">
