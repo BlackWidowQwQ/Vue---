@@ -65,15 +65,13 @@ const {
   medicalTags,
 } = tagStore;
 
-tagListModel.fetch();
-
 @Component({
   components: { Tags },
 })
 export default class OtherTags extends Vue {
   lightTag: TagItem = { name: "food", value: "餐饮" };
 
-  tagList = tagListModel.data;
+  tagList = window.tagList;
 
   foodTags = foodTags;
   shoppingTags = shoppingTags;
@@ -84,12 +82,9 @@ export default class OtherTags extends Vue {
 
   ok() {
     if (this.lightTag) {
-      const message = tagListModel.create(this.lightTag);
-      if (message === "duplicated") {
-        window.alert("标签重复了，请重新输入");
-      } else if (message === "success") {
-        window.alert("添加新标签成功!");
-        this.$router.replace("/addBill");
+      const inf = window.createTag(this.lightTag);
+      if (inf === "success") {
+        this.$router.back();
       }
     }
   }

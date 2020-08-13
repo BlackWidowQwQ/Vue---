@@ -24,13 +24,12 @@ import { Component, Watch } from "vue-property-decorator";
 import recordListModel from "@/model/recordListModel.ts";
 import tagListModel from "@/model/tagListModel.ts";
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
 
 @Component({
   components: { Head, Caculator, Tags },
 })
 export default class AddBill extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   // [
   //     { name: "food", value: "餐饮" },
   //     { name: "shopping", value: "购物" },
@@ -55,6 +54,7 @@ export default class AddBill extends Vue {
   saveRecord() {
     recordListModel.create(this.record);
   }
+
   @Watch("recordList")
   onRecordListChanged() {
     recordListModel.save();
