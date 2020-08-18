@@ -11,7 +11,4 @@ type RecordItem = {
   createdAt?: Date;
 };
 
-interface Window {
-  tagList: TagItem[];
-  createTag: (name: TagItem) => string;
-}
+// interface Window {}

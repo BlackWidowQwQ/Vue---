@@ -2,11 +2,7 @@
   <div class="addBill">
     {{ recordList }}
     <Head :typeValue.sync="record.type" />
-    <Tags
-      :data-source.sync="tags"
-      :selectedTag.sync="record.tag"
-      :dynamic="true"
-    />
+    <Tags :data-source.sync="tags" :selectedTag.sync="record.tag" :dynamic="true" />
     <Caculator
       :amountValue.sync="record.amount"
       @submit="saveRecord"
@@ -21,15 +17,13 @@ import Head from "@/components/AddBill/Head.vue";
 import Caculator from "@/components/AddBill/Caculator.vue";
 import Tags from "@/components/AddBill/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
-import recordListModel from "@/model/recordListModel.ts";
-import tagListModel from "@/model/tagListModel.ts";
-const recordList = recordListModel.fetch();
+import store from "@/store/index2";
 
 @Component({
   components: { Head, Caculator, Tags },
 })
 export default class AddBill extends Vue {
-  tags = window.tagList;
+  tags = store.tagList;
   // [
   //     { name: "food", value: "餐饮" },
   //     { name: "shopping", value: "购物" },
@@ -38,7 +32,7 @@ export default class AddBill extends Vue {
   //     { name: "entertainment", value: "娱乐" },
   //     { name: "medical", value: "医疗" },
   //   ];
-  recordList: RecordItem[] = recordList;
+  recordList = store.recordList;
 
   record: RecordItem = {
     tag: { name: "food", value: "餐饮" },
@@ -52,13 +46,13 @@ export default class AddBill extends Vue {
   }
 
   saveRecord() {
-    recordListModel.create(this.record);
+    store.createRecord(this.record);
   }
 
-  @Watch("recordList")
-  onRecordListChanged() {
-    recordListModel.save();
-  }
+  // @Watch("recordList")
+  // onRecordListChanged() {
+  //   recordListModel.save();
+  // }
 }
 </script>
 

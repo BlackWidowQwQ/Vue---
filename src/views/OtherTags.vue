@@ -52,9 +52,10 @@
 <script lang="ts">
 import Vue from "vue";
 import Tags from "@/components/AddBill/Tags.vue";
-import tagStore from "@/constants/tagStore.ts";
-import tagListModel from "@/model/tagListModel.ts";
+
 import { Component, Prop } from "vue-property-decorator";
+import store from "@/store/index2.ts";
+import tagInitial from "@/constants/tagInitial.ts";
 
 const {
   foodTags,
@@ -63,7 +64,7 @@ const {
   houseTags,
   entertainmentTags,
   medicalTags,
-} = tagStore;
+} = tagInitial;
 
 @Component({
   components: { Tags },
@@ -71,7 +72,7 @@ const {
 export default class OtherTags extends Vue {
   lightTag: TagItem = { name: "food", value: "餐饮" };
 
-  tagList = window.tagList;
+  tagList = store.tagList;
 
   foodTags = foodTags;
   shoppingTags = shoppingTags;
@@ -82,7 +83,7 @@ export default class OtherTags extends Vue {
 
   ok() {
     if (this.lightTag) {
-      const inf = window.createTag(this.lightTag);
+      const inf = store.createTag(this.lightTag);
       if (inf === "success") {
         this.$router.back();
       }
