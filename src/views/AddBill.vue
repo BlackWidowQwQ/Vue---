@@ -2,7 +2,7 @@
   <div class="addBill">
     {{ recordList }}
     <Head :typeValue.sync="record.type" />
-    <Tags :data-source.sync="tags" :selectedTag.sync="record.tag" :dynamic="true" />
+    <Tags :tagList="tags" :selectedTag.sync="record.tag" :dynamic="true" />
     <Caculator
       :amountValue.sync="record.amount"
       @submit="saveRecord"

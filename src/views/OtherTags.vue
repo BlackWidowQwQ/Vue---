@@ -23,27 +23,27 @@
     <div class="content">
       <div class="food">
         <span class="kind-name">餐饮</span>
-        <Tags :dataSource="foodTags" :selectedTag.sync="lightTag" />
+        <Tags :tagList="foodTags" :selectedTag.sync="lightTag" />
       </div>
       <div class="shopping">
         <span class="kind-name">购物</span>
-        <Tags :dataSource="shoppingTags" :selectedTag.sync="lightTag" />
+        <Tags :tagList="shoppingTags" :selectedTag.sync="lightTag" />
       </div>
       <div class="transport">
         <span class="kind-name">交通</span>
-        <Tags :dataSource="transportTags" :selectedTag.sync="lightTag" />
+        <Tags :tagList="transportTags" :selectedTag.sync="lightTag" />
       </div>
       <div class="house">
         <span class="kind-name">居住</span>
-        <Tags :dataSource="houseTags" :selectedTag.sync="lightTag" />
+        <Tags :tagList="houseTags" :selectedTag.sync="lightTag" />
       </div>
       <div class="entertainment">
         <span class="kind-name">娱乐</span>
-        <Tags :dataSource="entertainmentTags" :selectedTag.sync="lightTag" />
+        <Tags :tagList="entertainmentTags" :selectedTag.sync="lightTag" />
       </div>
       <div class="medical">
         <span class="kind-name">医疗</span>
-        <Tags :dataSource="medicalTags" :selectedTag.sync="lightTag" />
+        <Tags :tagList="medicalTags" :selectedTag.sync="lightTag" />
       </div>
     </div>
   </div>
@@ -52,7 +52,6 @@
 <script lang="ts">
 import Vue from "vue";
 import Tags from "@/components/AddBill/Tags.vue";
-
 import { Component, Prop } from "vue-property-decorator";
 import store from "@/store/index2.ts";
 import tagInitial from "@/constants/tagInitial.ts";
@@ -71,9 +70,7 @@ const {
 })
 export default class OtherTags extends Vue {
   lightTag: TagItem = { name: "food", value: "餐饮" };
-
-  tagList = store.tagList;
-
+  // tagList = store.fetchTags();
   foodTags = foodTags;
   shoppingTags = shoppingTags;
   transportTags = transportTags;

@@ -1,7 +1,7 @@
 <template>
   <ul class="tags">
     <li
-      v-for="(tag, index) in dataSource"
+      v-for="(tag, index) in tagList"
       :key="index"
       :class="{ selected: selectedTag.name === tag.name }"
       @click="toggle(tag)"
@@ -17,7 +17,6 @@
         <Icon name="addTag" />
       </div>
       <span>添加</span>
-      <!-- <button @click="create">输入标签吧</button> -->
     </li>
   </ul>
 </template>
@@ -25,23 +24,18 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
+import store from "@/store/index2";
 @Component
 export default class Tags extends Vue {
-  @Prop() readonly dataSource: TagItem[] | undefined;
   @Prop() readonly selectedTag!: TagItem;
   @Prop({ type: Boolean, default: false }) dynamic!: boolean;
+  @Prop({ type: Array, required: true }) tagList!: TagItem[];
 
   toggle(tag: TagItem) {
     this.$emit("update:selectedTag", tag);
   }
 
   create() {
-    // const name = window.prompt("请输入标签名");
-    // if (name === "") {
-    //   window.alert("标签名不能为空!"); //name为用户输入的内容
-    // } else if (this.dataSource && name) {
-    //   this.$emit("update:dataSource", [...this.dataSource, name]);
-    // }
     this.$router.push("/otherTags");
   }
 }
