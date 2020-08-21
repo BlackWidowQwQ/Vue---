@@ -83,6 +83,7 @@ export default class OtherTags extends Vue {
     if (this.lightTag) {
       this.$store.commit("createTag", clone(this.lightTag));
       if (this.$store.state.createTagInf === "success") {
+        this.$store.state.choseTag = clone(this.lightTag);
         this.$router.back();
       }
     }

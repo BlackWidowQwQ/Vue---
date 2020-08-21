@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import clone from "@/lib/clone";
+import router from "@/router";
 
 Vue.use(Vuex); //把store绑定到vue的prototype上 Vue.prototype.$store=store
 
@@ -9,6 +10,7 @@ const store = new Vuex.Store({
     recordList: [] as RecordItem[],
     tagList: [] as TagItem[],
     createTagInf: "" as string,
+    choseTag: { name: "food", value: "餐饮" } as TagItem,
   },
   mutations: {
     fetchRecord(state) {
@@ -47,6 +49,23 @@ const store = new Vuex.Store({
         store.commit("saveTags");
         window.alert("添加新标签成功!");
         state.createTagInf = "success"; //用返回的字符串"success”表创建成功
+      }
+    },
+
+    removeTag(state, tagValue: string) {
+      let index = -1;
+      for (let i = 0; i < state.tagList.length; i++) {
+        if (state.tagList[i].value === tagValue) {
+          index = i;
+          break;
+        }
+      }
+      if (index >= 0) {
+        state.tagList.splice(index, 1);
+        store.commit("saveTags");
+        router.back();
+      } else {
+        window.alert("删除失败");
       }
     },
 

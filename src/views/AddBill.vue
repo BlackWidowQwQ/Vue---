@@ -1,6 +1,6 @@
 <template>
   <div class="addBill">
-    {{ tags }}
+    {{ recordList }}
     <Head :typeValue.sync="record.type" />
     <Tags :tagList="tags" :selectedTag.sync="record.tag" :dynamic="true" />
     <Caculator
@@ -27,20 +27,23 @@ export default class AddBill extends Vue {
   get recordList(): RecordItem[] {
     return this.$store.state.recordList;
   }
+  get choseTag(): TagItem {
+    return this.$store.state.choseTag;
+  }
 
   get tags(): TagItem[] {
     return this.$store.state.tagList;
   }
 
   record: RecordItem = {
-    tag: { name: "food", value: "餐饮" },
+    tag: this.choseTag,
     notes: "",
     type: "-",
     amount: 0,
   };
 
   created() {
-    this.$store.commit("fetchRecords");
+    this.$store.commit("fetchRecord");
   }
 
   onUpdateNotes(notes: string) {
