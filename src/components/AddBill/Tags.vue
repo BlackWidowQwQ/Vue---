@@ -12,7 +12,7 @@
       <span>{{ tag.value }}</span>
     </li>
 
-    <li v-if="dynamic" class="new" @click="create">
+    <li v-if="dynamic" class="new" @click="addTag">
       <div>
         <Icon name="addTag" />
       </div>
@@ -24,7 +24,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-import store from "@/store/index2";
+
 @Component
 export default class Tags extends Vue {
   @Prop() readonly selectedTag!: TagItem;
@@ -35,8 +35,12 @@ export default class Tags extends Vue {
     this.$emit("update:selectedTag", tag);
   }
 
-  create() {
+  addTag() {
     this.$router.push("/otherTags");
+  }
+
+  created() {
+    this.$store.commit("fetchTags");
   }
 }
 </script>

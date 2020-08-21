@@ -53,8 +53,9 @@
 import Vue from "vue";
 import Tags from "@/components/AddBill/Tags.vue";
 import { Component, Prop } from "vue-property-decorator";
-import store from "@/store/index2.ts";
+
 import tagInitial from "@/constants/tagInitial.ts";
+import clone from "@/lib/clone";
 
 const {
   foodTags,
@@ -70,7 +71,7 @@ const {
 })
 export default class OtherTags extends Vue {
   lightTag: TagItem = { name: "food", value: "餐饮" };
-  // tagList = store.fetchTags();
+
   foodTags = foodTags;
   shoppingTags = shoppingTags;
   transportTags = transportTags;
@@ -80,8 +81,8 @@ export default class OtherTags extends Vue {
 
   ok() {
     if (this.lightTag) {
-      const inf = store.createTag(this.lightTag);
-      if (inf === "success") {
+      this.$store.commit("createTag", clone(this.lightTag));
+      if (this.$store.state.createTagInf === "success") {
         this.$router.back();
       }
     }
