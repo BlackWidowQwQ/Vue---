@@ -1,6 +1,5 @@
 <template>
   <div class="addBill">
-    {{ recordList }}
     <Head :typeValue.sync="record.type" />
     <Tags :tagList="tags" :selectedTag.sync="record.tag" :dynamic="true" />
     <Caculator
