@@ -17,7 +17,7 @@ export default class HeadTit extends Vue {}
 @import "~@/assets/style/helper.scss";
 .headTit {
   background: $color-theme-0;
-  border-bottom: white 1px;
+  border-bottom: white solid 2px;
   display: flex;
   justify-content: center;
   font-size: 22px;

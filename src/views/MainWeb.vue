@@ -4,7 +4,7 @@
     <div class="content">
       <div class="dateBoard">
         <div>今天是:</div>
-        <div>2020年8月22日</div>
+        <div>{{today}}</div>
         <div>点击下方「记账」来记一笔吧~</div>
       </div>
       <div class="rencent">最近的账单</div>
@@ -17,7 +17,16 @@ import Vue from "vue";
 import HeadTit from "@/components/HeadTit.vue";
 import { Component } from "vue-property-decorator";
 @Component({ components: { HeadTit } })
-export default class MainWeb extends Vue {}
+export default class MainWeb extends Vue {
+  time = new Date();
+  today =
+    this.time.getFullYear() +
+    "年" +
+    (this.time.getMonth() + 1) +
+    "月" +
+    this.time.getDate() +
+    "日";
+}
 </script>
 
 <style lang="scss" scoped>
