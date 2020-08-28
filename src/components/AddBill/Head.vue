@@ -5,15 +5,15 @@
         <Icon name="Cancel"></Icon>
       </button>
     </router-link>
-
-    <ul class="type">
+    <Tabs :dataSource="recordTypeList" :value.sync="typeValue" />
+    <!-- <ul class="type">
       <li :class="typeValue === '-' && 'selected'" @click="selectType('-')">
         支出
       </li>
       <li :class="typeValue === '+' && 'selected'" @click="selectType('+')">
         收入
       </li>
-    </ul>
+    </ul>-->
   </div>
 </template>
 

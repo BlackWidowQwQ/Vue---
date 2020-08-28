@@ -1,6 +1,13 @@
 <template>
   <div class="addBill">
-    <Head :typeValue.sync="record.type" />
+    <div class="head">
+      <router-link to class="cancel">
+        <button @click="$router.back(-1)">
+          <Icon name="Cancel"></Icon>
+        </button>
+      </router-link>
+      <Tabs :dataSource="recordTypeList" :value.sync="record.type" />
+    </div>
     <Tags :tagList="tags" :selectedTag.sync="record.tag" :dynamic="true" />
     <Caculator
       :amountValue.sync="record.amount"
@@ -12,17 +19,19 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Head from "@/components/AddBill/Head.vue";
 import Caculator from "@/components/AddBill/Caculator.vue";
+import Tabs from "@/components/Tabs.vue";
 import Tags from "@/components/AddBill/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
-
 import store from "@/store/index";
+import tabList from "@/constants/tabList";
 
 @Component({
-  components: { Head, Caculator, Tags },
+  components: { Caculator, Tags, Tabs },
 })
 export default class AddBill extends Vue {
+  recordTypeList = tabList.recordTypeList;
+
   get recordList(): RecordItem[] {
     return this.$store.state.recordList;
   }
@@ -61,5 +70,25 @@ export default class AddBill extends Vue {
   display: flex;
   height: 100vh;
   flex-direction: column;
+  .head {
+    background: $color-theme-0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    .cancel {
+      position: absolute;
+      left: 0;
+      height: 100%;
+      > button {
+        height: 64px;
+        background: transparent;
+        border: none;
+        .icon {
+          height: 32px;
+          width: 32px;
+        }
+      }
+    }
+  }
 }
 </style>
