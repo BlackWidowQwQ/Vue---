@@ -8,7 +8,7 @@ type RecordItem = {
   tag: TagItem;
   notes: string;
   amount: number;
-  createdAt?: Date;
+  createdAt?: string;
 };
 
 // interface Window {}

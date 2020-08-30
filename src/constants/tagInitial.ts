@@ -18,7 +18,7 @@ const tagInitial = {
 
   foodTags: [
     { name: "food", value: "餐饮" },
-    { name: "rice", value: "午餐/晚餐" },
+    { name: "rice", value: "正餐" },
     { name: "outgoing", value: "外卖" },
     { name: "vegetables", value: "买菜" },
     { name: "snacks", value: "零食" },
@@ -47,7 +47,7 @@ const tagInitial = {
 
   houseTags: [
     { name: "house", value: "居住" },
-    { name: "phone", value: "话费网费" },
+    { name: "phone", value: "话费" },
     { name: "water", value: "水电费" },
     { name: "fix", value: "维修" },
   ] as TagItem[],
