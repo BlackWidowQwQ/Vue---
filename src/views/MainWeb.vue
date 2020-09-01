@@ -1,10 +1,9 @@
 <template>
   <Layout>
-    <HeadTit />
     <div class="content">
       <div class="dateBoard">
         <div>今天是:</div>
-        <div>{{today}}</div>
+        <div>{{ today }}</div>
         <div>点击下方「记账」来记一笔吧~</div>
       </div>
       <div class="rencent">最近的账单</div>
@@ -14,9 +13,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import HeadTit from "@/components/HeadTit.vue";
 import { Component } from "vue-property-decorator";
-@Component({ components: { HeadTit } })
+@Component({ components: {} })
 export default class MainWeb extends Vue {
   time = new Date();
   today =

@@ -1,5 +1,6 @@
 <template>
   <div class="nav-wrapper">
+    <HeadTit />
     <div class="content" :class="classPrefix && `${classPrefix}-content`">
       <slot />
     </div>

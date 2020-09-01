@@ -9,7 +9,7 @@
     </div>
 
     <div class="numberpad">
-      <div class="output">{{output}}</div>
+      <div class="output">{{ output }}</div>
       <div class="buttons">
         <button @click="inputContent">1</button>
         <button @click="inputContent">2</button>
@@ -30,14 +30,13 @@
   </div>
 </template>
 
-
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class Caculator extends Vue {
-  @Prop() readonly amountValue!: number;
+  @Prop(Number) readonly amountValue!: number;
   output = this.amountValue.toString();
   notevalue = "";
   @Watch("notevalue")

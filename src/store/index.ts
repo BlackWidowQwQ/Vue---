@@ -11,8 +11,25 @@ const store = new Vuex.Store({
     tagList: [] as TagItem[],
     createTagInf: "" as string,
     choseTag: { name: "food", value: "餐饮" } as TagItem,
+    budget: "" as string,
   },
   mutations: {
+    //budget
+    removeBudget(state) {
+      state.budget = "";
+      store.commit("saveBudget");
+    },
+    fetchBudget(state) {
+      state.budget = JSON.parse(window.localStorage.getItem("budget") || "");
+    },
+    createBudget(state, money: number) {
+      state.budget = money + "";
+      store.commit("saveBudget");
+    },
+    saveBudget(state) {
+      window.localStorage.setItem("budget", JSON.stringify(state.budget));
+    },
+    //record
     fetchRecord(state) {
       state.recordList = JSON.parse(
         window.localStorage.getItem("recordList") || "[]"

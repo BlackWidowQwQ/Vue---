@@ -1,7 +1,6 @@
 <template>
   <div>
     <Layout>
-      <HeadTit />
       Statistics.vue
     </Layout>
   </div>
@@ -9,9 +8,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import HeadTit from "@/components/HeadTit.vue";
 import { Component } from "vue-property-decorator";
-@Component({ components: { HeadTit } })
+@Component({ components: {} })
 export default class Statistics extends Vue {}
 </script>
 
