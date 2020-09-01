@@ -143,18 +143,20 @@ export default class Count extends Vue {
   }
   createBudget() {
     const moneySet = window.prompt("设置预算：");
-
-    if (moneySet == "") {
-      window.alert("您并未输入预算！预算清空！");
-      this.$store.commit("removeBudget");
-      return;
+    if (moneySet) {
+      if (moneySet == "") {
+        window.alert("您并未输入预算！预算清空！");
+        this.$store.commit("removeBudget");
+        return;
+      }
+      const moneySetNum = Number(moneySet);
+      if (moneySetNum.toString() === "NaN") {
+        window.alert("您的输入格式有误，请重新输入");
+        return;
+      }
+      this.$store.commit("createBudget", moneySetNum);
     }
-    const moneySetNum = Number(moneySet);
-    if (moneySetNum.toString() === "NaN") {
-      window.alert("您的输入格式有误，请重新输入");
-      return;
-    }
-    this.$store.commit("createBudget", moneySetNum);
+    return;
   }
 }
 </script>
