@@ -1,6 +1,10 @@
 <template>
   <Layout>
     <div class="parcel">
+      <span class="dateBoard">
+        <div>今天是:</div>
+        <span>{{ todayDate }}</span>
+      </span>
       <div>本月支出:</div>
       <span class="expenses">￥{{ sum("-", "month") }}</span>
       <div class="budget">
@@ -11,8 +15,10 @@
               "" + ($store.state.budget - sum("-", "month")).toFixed(2)) ||
               "请设置预算"
           }}
+          <Icon name="Cancel" style="transform:rotate(180deg)" />
         </span>
       </div>
+      <span>点击下方「记账」来记一笔吧~</span>
     </div>
 
     <div class="today">
@@ -104,6 +110,11 @@ export default class Count extends Vue {
     return dayjs(string).format("HH:mm");
   }
 
+  get todayDate() {
+    const now = dayjs();
+    return now.format("YYYY年M月D日");
+  }
+
   get recordList() {
     return this.$store.state.recordList as RecordItem[];
   }
@@ -140,6 +151,7 @@ export default class Count extends Vue {
 
   mounted() {
     this.$store.commit("fetchRecord");
+    this.$store.commit("fetchBudget");
   }
   createBudget() {
     const moneySet = window.prompt("设置预算：");
@@ -176,7 +188,7 @@ export default class Count extends Vue {
 }
 
 %item {
-  padding: 8px 16px;
+  padding: 4px 16px;
   line-height: 24px;
   display: flex;
   justify-content: space-between;
@@ -192,18 +204,27 @@ export default class Count extends Vue {
   @extend %outer-shadow;
   @extend %item;
   color: #ffffff;
-  padding: 5px 8px;
+  padding: 5px;
+  padding-bottom: 8px;
   display: flex;
   flex-direction: column;
   div {
-    padding: 10px 8px;
+    padding: 8px;
   }
+  .dateBoard {
+    display: flex;
+    flex-direction: column;
+    :nth-child(2) {
+      font-size: 35px;
+      text-align: center;
+    }
+  }
+
   .budget {
     display: flex;
     justify-content: space-between;
     span {
       font-size: 14px;
-      padding-right: 5px;
     }
   }
   .expenses {
@@ -211,10 +232,13 @@ export default class Count extends Vue {
     font-weight: bold;
     padding-left: 10px;
   }
+  :last-child {
+    text-align: center;
+  }
 }
 
 .today {
-  margin: 12px;
+  margin: 8px 12px;
   font-weight: bold;
   span {
     padding-right: 8px;
@@ -263,8 +287,4 @@ export default class Count extends Vue {
     }
   }
 }
-
-// .notes {
-//   color: #999;
-// }
 </style>

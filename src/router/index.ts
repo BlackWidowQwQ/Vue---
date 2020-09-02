@@ -14,13 +14,13 @@ const routes = [
   //重定向，设置首页
   {
     path: "/",
-    redirect: "/mainWeb",
+    redirect: "/count",
   },
 
-  {
-    path: "/mainWeb",
-    component: MainWeb,
-  },
+  // {
+  //   path: "/mainWeb",
+  //   component: MainWeb,
+  // },
 
   {
     path: "/count",
@@ -42,10 +42,10 @@ const routes = [
     component: Statistics,
   },
 
-  {
-    path: "/myOption",
-    component: MyOption,
-  },
+  // {
+  //   path: "/myOption",
+  //   component: MyOption,
+  // },
 
   {
     path: "*",

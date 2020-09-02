@@ -1,8 +1,8 @@
 <template>
   <div class="nav">
-    <router-link to="/MainWeb" class="item" active-class="selected">
+    <!-- <router-link to="/MainWeb" class="item" active-class="selected">
       <Icon name="MainWeb" />首页
-    </router-link>
+    </router-link> -->
     <router-link to="/count" class="item" active-class="selected">
       <Icon name="Count" />明细
     </router-link>
@@ -12,9 +12,9 @@
     <router-link to="/statistics" class="item" active-class="selected">
       <Icon name="Statistics" />统计
     </router-link>
-    <router-link to="/myOption" class="item" active-class="selected">
+    <!-- <router-link to="/myOption" class="item" active-class="selected">
       <Icon name="MyOption" />我的
-    </router-link>
+    </router-link> -->
   </div>
 </template>
 
