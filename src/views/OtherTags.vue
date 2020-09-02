@@ -11,7 +11,6 @@
       </div>
       <button @click="ok" class="ok">完成</button>
     </header>
-    {{ lightTag }}
     <div class="current">
       <div class="label">
         <span>选中标签:</span>

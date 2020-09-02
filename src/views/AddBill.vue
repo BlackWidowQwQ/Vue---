@@ -8,7 +8,18 @@
       </router-link>
       <Tabs :dataSource="recordTypeList" :value.sync="record.type" />
     </div>
-    <Tags :tagList="tags" :selectedTag.sync="record.tag" :dynamic="true" />
+    <Tags
+      v-if="record.type === '-'"
+      :tagList="tags"
+      :selectedTag.sync="record.tag"
+      :dynamic="true"
+    />
+    <Tags
+      v-else-if="record.type === '+'"
+      :selected-tag.sync="record.tag"
+      :tag-list="incomeTags"
+      class="tag-list"
+    />
     <Caculator
       :amountValue.sync="record.amount"
       @submit="saveRecord"
@@ -25,13 +36,14 @@ import Tags from "@/components/AddBill/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
 import store from "@/store/index";
 import tabList from "@/constants/tabList";
+import tagInitial from "@/constants/tagInitial";
 
 @Component({
   components: { Caculator, Tags, Tabs },
 })
 export default class AddBill extends Vue {
   recordTypeList = tabList.recordTypeList;
-
+  incomeTags = tagInitial.defaultIncomeTags;
   get recordList(): RecordItem[] {
     return this.$store.state.recordList;
   }

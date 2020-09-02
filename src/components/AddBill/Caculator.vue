@@ -81,9 +81,11 @@ export default class Caculator extends Vue {
     this.output = "0";
   }
   ok() {
-    this.$emit("update:amountValue", this.output);
-    this.$emit("submit", this.output);
+    const number = Number(this.output);
+    this.$emit("update:amountValue", number);
+    this.$emit("submit", number);
     this.output = "0";
+    this.$router.back();
   }
 }
 </script>
