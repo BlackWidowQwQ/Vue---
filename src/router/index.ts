@@ -8,6 +8,8 @@ import AddBill from "@/views/AddBill.vue";
 import MyOption from "@/views/MyOption.vue";
 import NotFound from "@/views/NotFound.vue";
 import OtherTags from "@/views/OtherTags.vue";
+import RecordEdit from "@/views/RecordEdit.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -40,6 +42,11 @@ const routes = [
   {
     path: "/statistics",
     component: Statistics,
+  },
+
+  {
+    path: "/count/edit/:id",
+    component: RecordEdit,
   },
 
   // {
