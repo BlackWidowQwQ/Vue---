@@ -1,14 +1,15 @@
 <template>
-  <Layout
-    ><div class="navBar">
+  <Layout>
+    <div class="navBar">
       <router-link to class="cancel">
         <button @click="$router.back(-1)">
           <Icon name="Cancel"></Icon>
         </button>
       </router-link>
-      <span class="title"
-        ><Icon :name="record.tag.name" />{{ record.tag.value }}</span
-      >
+      <span class="title">
+        <Icon :name="record.tag.name" />
+        {{ record.tag.value }}
+      </span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
@@ -36,8 +37,8 @@
     <div class="button-wrapper">
       <Button @click="saveEdit">修改</Button>
       <Button class="deleteButton" @click="remove">删除</Button>
-    </div></Layout
-  >
+    </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -58,12 +59,27 @@ export default class RecordEdit extends Vue {
       this.$router.replace("/404");
     }
   }
+
+  editAmount(value: string) {
+    if (Number(value).toString() == "NaN") {
+      window.alert("输入有误，请重新输入");
+    } else {
+      this.record!.amount = Number(value);
+    }
+  }
+
   saveEdit() {
-    return;
+    this.$store.commit("updateRecord", {
+      id: this.record?.id,
+      notes: this.record?.notes,
+      amount: this.record?.amount,
+    });
+    this.$router.back();
   }
 
   remove() {
-    return;
+    this.$store.commit("removeRecord", this.record?.id);
+    this.$router.back();
   }
 }
 </script>

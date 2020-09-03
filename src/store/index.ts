@@ -43,6 +43,33 @@ const store = new Vuex.Store({
       store.commit("saveRecord");
     },
 
+    updateRecord(state, payload) {
+      const { id, notes, amount } = payload;
+      const idList = state.recordList.map((item) => item.id);
+      if (idList.indexOf(id) >= 0) {
+        const record = state.recordList.filter((item) => item.id === id)[0];
+        record.notes = notes;
+        record.amount = amount;
+        store.commit("saveRecord");
+      }
+    },
+
+    removeRecord(state, id: number) {
+      let index = -1;
+      for (let i = 0; i < state.recordList.length; i++) {
+        if (state.recordList[i].id === id) {
+          index = i;
+          break;
+        }
+      }
+      if (index >= 0) {
+        state.recordList.splice(index, 1);
+        store.commit("saveRecord");
+      } else {
+        window.alert("删除失败！");
+      }
+    },
+
     saveRecord(state) {
       window.localStorage.setItem(
         "recordList",
