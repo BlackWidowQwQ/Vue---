@@ -2,13 +2,13 @@ import Vue from "vue";
 import Vuex from "vuex";
 import clone from "@/lib/clone";
 import router from "@/router";
-
+import tagInitial from "@/constants/tagInitial";
 Vue.use(Vuex); //把store绑定到vue的prototype上 Vue.prototype.$store=store
 
 const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
-    tagList: [] as TagItem[],
+    tagList: clone(tagInitial.defaultExpenseTags) as TagItem[],
     createTagInf: "" as string,
     choseTag: { name: "food", value: "餐饮" } as TagItem,
     budget: "" as string,
@@ -41,6 +41,7 @@ const store = new Vuex.Store({
       record2.createdAt = new Date().toISOString();
       state.recordList.push(record2);
       store.commit("saveRecord");
+      window.alert("已保存");
     },
 
     updateRecord(state, payload) {
@@ -68,6 +69,7 @@ const store = new Vuex.Store({
       } else {
         window.alert("删除失败！");
       }
+      store.commit("saveRecord");
     },
 
     saveRecord(state) {

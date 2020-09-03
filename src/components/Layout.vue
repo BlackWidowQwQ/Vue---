@@ -24,7 +24,6 @@ export default {
 }
 .content {
   flex-grow: 1;
-  // border: 1px solid blue;
   overflow: auto;
 }
 </style>
