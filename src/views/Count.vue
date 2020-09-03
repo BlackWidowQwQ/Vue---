@@ -64,40 +64,22 @@ import Vue from "vue";
 import Tabs from "@/components/Tabs.vue";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
+import addAmount from "@/lib/addAmount";
 import { Component } from "vue-property-decorator";
 
 @Component({ components: { Tabs } })
 export default class Count extends Vue {
   sum(type: string, time: string) {
-    let daily = 0;
-    let monthly = 0;
-    const now = dayjs();
     const { recordList } = this;
-    const newList = clone(recordList).filter((r) => r.type === type);
-    for (let i = 0; i < newList.length; i++) {
-      if (now.isSame(dayjs(newList[i].createdAt), "day")) {
-        daily += Number(newList[i].amount);
-      }
-      if (now.isSame(dayjs(newList[i].createdAt), "month")) {
-        monthly += Number(newList[i].amount);
-      }
-    }
-    if (time === "day") {
-      return daily;
-    }
-    if (time === "month") {
-      return monthly;
-    } else {
-      return;
-    }
+    return addAmount(type, time, recordList);
   }
 
   beautifyDate(string: string) {
-    const now = new Date();
+    const now = dayjs();
     const time = dayjs(string); //传入ISO字符串
     if (time.isSame(now, "day")) {
       return "今天";
-    } else if (time.isBefore(now, "day")) {
+    } else if (time.isSame(now.subtract(1, "day"), "day")) {
       return "昨天";
     } else if (time.isSame(now, "year")) {
       return time.format("M月D日");
@@ -175,10 +157,6 @@ export default class Count extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-
-// ::v-deep .interval-tabs-item {
-//   border: solid red;
-// }
 
 .tab {
   background: $color-theme-0;
