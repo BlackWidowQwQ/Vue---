@@ -29,31 +29,32 @@
     <ol>
       <li v-for="(group, index) in groupedList" :key="index">
         <h3 class="title">{{ beautifyDate(group.title) }}</h3>
-        <ol>
-          <li v-for="item in group.items" :key="item.name" class="record">
-            <span class="left">
-              <Icon :name="item.tag.name" />
-              <span class="tag-notes">
-                <span class="tag">{{ item.tag.value }}</span
-                ><span class="notes">{{
-                  item.notes || "暂无备注，点击添加"
-                }}</span></span
-              ></span
-            >
-            <span class="right">
-              <span
-                class="amount"
-                :class="{
-                  incomeType: item.type === '+',
-                  outcomeType: item.type === '-',
-                }"
-                >{{ item.type }}￥{{ item.amount }}</span
-              ><span class="time">{{
-                beautifyTime(item.createdAt)
+        <router-link
+          v-for="item in group.items"
+          :key="item.id"
+          class="record"
+          :to="`count/edit/${item.id}`"
+        >
+          <span class="left">
+            <Icon :name="item.tag.name" />
+            <span class="tag-notes">
+              <span class="tag">{{ item.tag.value }}</span
+              ><span class="notes">{{
+                item.notes || "暂无备注，点击添加"
               }}</span></span
-            >
-          </li>
-        </ol>
+            ></span
+          >
+          <span class="right">
+            <span
+              class="amount"
+              :class="{
+                incomeType: item.type === '+',
+                outcomeType: item.type === '-',
+              }"
+              >{{ item.type }}￥{{ item.amount }}</span
+            ><span class="time">{{ beautifyTime(item.createdAt) }}</span></span
+          >
+        </router-link>
       </li>
     </ol>
   </Layout>

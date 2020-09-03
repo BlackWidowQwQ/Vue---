@@ -37,7 +37,7 @@ import { Component, Watch } from "vue-property-decorator";
 import store from "@/store/index";
 import tabList from "@/constants/tabList";
 import tagInitial from "@/constants/tagInitial";
-
+import idCreator from "@/lib/idCreator";
 @Component({
   components: { Caculator, Tags, Tabs },
 })
@@ -56,6 +56,7 @@ export default class AddBill extends Vue {
   }
 
   record: RecordItem = {
+    id: 0,
     tag: this.choseTag,
     notes: "",
     type: "-",
@@ -71,6 +72,7 @@ export default class AddBill extends Vue {
   }
 
   saveRecord() {
+    this.record.id = idCreator();
     this.$store.commit("createRecord", this.record);
   }
 }
@@ -95,9 +97,11 @@ export default class AddBill extends Vue {
         height: 64px;
         background: transparent;
         border: none;
+
         .icon {
           height: 32px;
           width: 32px;
+          color: white;
         }
       }
     }
