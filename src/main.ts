@@ -28,7 +28,9 @@ window.onload = function() {
 };
 
 if (document.documentElement.clientWidth > 500) {
-  window.alert("请使用手机打开页面，效果更佳");
+  window.alert(
+    "检测到您使用非手机设备，请扫描二维码使用手机打开页面，效果更佳！"
+  );
   const img = document.createElement("img");
   img.src = "./QRcode.png";
   img.style.position = "fixed";
