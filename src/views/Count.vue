@@ -110,7 +110,6 @@ export default class Count extends Vue {
     const newList = clone(recordList).sort(
       (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
     );
-    // const hashTable: HashTableValue[] = [];
     const result = [
       {
         title: dayjs(newList[0].createdAt).format("YYYY-MM-DD"),

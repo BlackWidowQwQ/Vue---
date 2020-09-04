@@ -8,7 +8,7 @@ Vue.use(Vuex); //把store绑定到vue的prototype上 Vue.prototype.$store=store
 const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
-    tagList: clone(tagInitial.defaultExpenseTags) as TagItem[],
+    tagList: [] as TagItem[],
     createTagInf: "" as string,
     choseTag: { name: "food", value: "餐饮" } as TagItem,
     budget: "" as string,
@@ -20,7 +20,7 @@ const store = new Vuex.Store({
       store.commit("saveBudget");
     },
     fetchBudget(state) {
-      state.budget = JSON.parse(window.localStorage.getItem("budget") || "");
+      state.budget = window.localStorage.getItem("budget" || "") || "";
     },
     createBudget(state, money: number) {
       state.budget = money + "";
@@ -80,9 +80,10 @@ const store = new Vuex.Store({
     },
     //tags
     fetchTags(state) {
-      return (state.tagList = JSON.parse(
-        window.localStorage.getItem("tagList") || "[]"
-      ));
+      state.tagList = JSON.parse(
+        window.localStorage.getItem("tagList") ||
+          JSON.stringify(tagInitial.defaultExpenseTags)
+      );
     },
 
     createTag(state, tag: TagItem) {
