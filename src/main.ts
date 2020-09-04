@@ -30,7 +30,7 @@ window.onload = function() {
 if (document.documentElement.clientWidth > 500) {
   window.alert("请使用手机打开页面，效果更佳");
   const img = document.createElement("img");
-  img.src = "/QRcode.png";
+  img.src = "~/public/QRcode.png";
   img.style.position = "fixed";
   img.style.left = "50%";
   img.style.top = "50%";
