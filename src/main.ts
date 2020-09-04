@@ -26,3 +26,7 @@ window.onload = function() {
     window.scrollTo(0, 500);
   }, 0);
 };
+
+if (document.documentElement.clientWidth > 500) {
+  window.alert("请使用手机打开页面，效果更佳");
+}

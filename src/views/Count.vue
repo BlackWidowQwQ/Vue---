@@ -12,7 +12,9 @@
         <span @click="createBudget"
           >预算剩余:￥{{
             ($store.state.budget &&
-              "" + ($store.state.budget - sum("-", "month")).toFixed(2)) ||
+              (Number($store.state.budget) - sum("-", "month"))
+                .toFixed(2)
+                .toString()) ||
               "请设置预算"
           }}
           <Icon name="Cancel" style="transform:rotate(180deg)" />
