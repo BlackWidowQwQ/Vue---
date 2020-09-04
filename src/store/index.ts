@@ -20,7 +20,7 @@ const store = new Vuex.Store({
       store.commit("saveBudget");
     },
     fetchBudget(state) {
-      state.budget = window.localStorage.getItem("budget" || "") || "";
+      state.budget = window.localStorage.getItem("budget") || "";
     },
     createBudget(state, money: number) {
       state.budget = money + "";
